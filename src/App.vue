@@ -3,7 +3,7 @@
     <!-- 边框栏 -->
     <div class="column aside">
       <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
-      <timeline-component/>
+      <timeline-component class="timeline"/>
     </div>
     <!-- 主内容 -->
     <div class="column content">
@@ -153,6 +153,9 @@ export default {
     width: 100%;
     margin-top: 20px;
     margin-left: 0;
+  }
+  .timeline {
+    display: none;
   }
 }
 
