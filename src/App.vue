@@ -3,6 +3,7 @@
     <!-- 边框栏 -->
     <div class="column aside">
       <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
+      <timeline-component/>
     </div>
     <!-- 主内容 -->
     <div class="column content">
@@ -19,10 +20,11 @@ import HeadComponents from '@/components/aside/head/HeadComponents.vue'
 import ContentHeadComponent from '@/components/content/ContentHeadComponent.vue'
 import axios from 'axios'
 import eventMessage from '@/EventMessage'
+import TimelineComponent from '@/components/aside/TimelineComponent.vue'
 
 export default {
   name: 'IndexView',
-  components: { ContentHeadComponent, HeadComponents },
+  components: { TimelineComponent, ContentHeadComponent, HeadComponents },
   created () {
     this.getMarkdownList()
     eventMessage.$on('currentPageChange', (val) => {
