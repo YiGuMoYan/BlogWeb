@@ -1,13 +1,17 @@
 <template>
   <div class="main">
     <div v-for="(markdown, index) in markdownList" :key="markdown.id" class="card">
-      <content-card-component :type="isMutuality ? index % 2 : 0" :markdown="markdown"/>
+      <router-link :to="{path: '/blog/' + markdown.id, params:{'id': markdown.id}}">
+        <content-card-component :type="isMutuality ? index % 2 : 0" :markdown="markdown"/>
+      </router-link>
     </div>
     <el-pagination
       background
-      layout="prev, pager, next"
+      layout="total, prev, pager, next"
       @current-change="paginationChange"
-      :page-count="totalNum"
+      :total="total"
+      :page-size="5"
+      :current-page="currentPage"
       class="pagination">
     </el-pagination>
   </div>
@@ -26,25 +30,25 @@ export default {
       type: Array,
       // eslint-disable-next-line vue/require-valid-default-prop
       default: []
+    },
+    total: {
+      type: Number,
+      default: 0
+    },
+    currentPage: {
+      type: Number,
+      default: 1
     }
   },
   created () {
     this.setWindowWidth()
-    // 接收 总页面数量变化 的信号
-    eventMessage.$on('changeTotalNum', (val) => {
-      this.totalNum = val
-    })
   },
   data () {
     return {
       // 当前屏幕宽度 用于适配设备
       windowWidth: document.documentElement.clientWidth,
       // 是否让图片进行交错排列
-      isMutuality: this.windowWidth >= 1000,
-      // 总页面数量
-      totalNum: 1,
-      // 当前页面
-      currentPage: 1
+      isMutuality: this.windowWidth >= 1000
     }
   },
   methods: {
@@ -83,6 +87,10 @@ export default {
 
   .pagination {
     margin-top: 50px;
+  }
+
+  .router-link {
+    color: black;
   }
 }
 </style>

@@ -31,4 +31,12 @@ export default {
   text-align: center;
   font-family: myFirstFont, serif;
 }
+
+@media screen and (max-width: 1000px) {
+  .head {
+    font-size: 30px;
+    height: 150px;
+    line-height: 150px;
+  }
+}
 </style>

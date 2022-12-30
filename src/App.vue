@@ -9,7 +9,7 @@
       <!-- 主内容的标题 -->
       <content-head-component :title="title"/>
       <!-- 主内容的内容 -->
-      <div class="main"><router-view :markdown-list="currentMarkdownList"/></div>
+      <div class="main"><router-view :markdown-list="currentMarkdownList" :total="markdownListNum" :currentPage="currentPage"/></div>
     </div>
   </div>
 </template>
@@ -95,11 +95,6 @@ export default {
         }
       }
     },
-    // 计算一共有多少页面
-    setTotalNum () {
-      this.totalNum = Math.ceil(this.markdownListNum / 5)
-      eventMessage.$emit('changeTotalNum', this.totalNum)
-    },
     arrangeMarkdownList () {
       // 给 markdownList 逆序
       // 使最新的 markdown 显示在最前
@@ -108,7 +103,6 @@ export default {
       // 获取第一页 markdown 内容
       this.currentMarkdownList = this.markdownList.slice((this.currentPage - 1) * 5, this.currentPage * 5)
       this.setTags()
-      this.setTotalNum()
     }
   },
   watch: {

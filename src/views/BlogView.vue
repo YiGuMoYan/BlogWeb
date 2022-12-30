@@ -1,13 +1,48 @@
 <template>
-  <div></div>
+  <div class="blog">
+    <v-md-preview :text="markdown.markdown"></v-md-preview>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'BlogView'
+  name: 'BlogView',
+  created () {
+    this.getMarkdownById()
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      markdown: {}
+    }
+  },
+  methods: {
+    getMarkdownById () {
+      const that = this
+      axios({
+        url: 'http://127.0.0.1:8080/markdown/selectMarkdownById',
+        method: 'post',
+        data: {
+          id: that.id
+        }
+      }).then(function (res) {
+        that.markdown = res.data.data
+      })
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.blog {
+  margin-top: 30px;
 
+  /deep/ .vuepress-markdown-body {
+    background-color: #101F30;
+    color: aliceblue;
+    border-radius: 20px;
+  }
+}
 </style>
