@@ -2,7 +2,7 @@
   <div class="index">
     <!-- 边框栏 -->
     <div class="column aside">
-      <head-components :markdownListNum="markdownListNum" :tagListNum="tagListNum"/>
+      <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
     </div>
     <!-- 主内容 -->
     <div class="column content">
@@ -28,6 +28,9 @@ export default {
     eventMessage.$on('currentPageChange', (val) => {
       this.currentPage = val
     })
+    eventMessage.$on('changeTags', (val) => {
+      this.tags = val
+    })
   },
   data () {
     return {
@@ -46,7 +49,9 @@ export default {
       // 当前页面编号
       currentPage: 1,
       // 一共有多少个页面
-      totalNum: 0
+      totalNum: 0,
+      // 当前 tag
+      tags: []
     }
   },
   methods: {
@@ -58,14 +63,20 @@ export default {
         method: 'get'
       }).then(function (res) {
         that.markdownList = res.data.data
-        // 给 markdownList 逆序
-        // 使最新的 markdown 显示在最前
-        that.markdownList = that.markdownList.reverse()
-        that.markdownListNum = that.markdownList.length
-        // 获取第一页 markdown 内容
-        that.currentMarkdownList = that.markdownList.slice((that.currentPage - 1) * 5, that.currentPage * 5)
-        that.setTags()
-        that.setTotalNum()
+        that.arrangeMarkdownList()
+      })
+    },
+    getMarkdownListByTags () {
+      const that = this
+      axios({
+        url: 'http://127.0.0.1:8080/markdown/selectMarkdownByClassifications',
+        method: 'post',
+        data: {
+          tags: that.tags
+        }
+      }).then(function (res) {
+        that.markdownList = res.data.data
+        that.arrangeMarkdownList()
       })
     },
     // 解析所有 tag
@@ -88,6 +99,16 @@ export default {
     setTotalNum () {
       this.totalNum = Math.ceil(this.markdownListNum / 5)
       eventMessage.$emit('changeTotalNum', this.totalNum)
+    },
+    arrangeMarkdownList () {
+      // 给 markdownList 逆序
+      // 使最新的 markdown 显示在最前
+      this.markdownList = this.markdownList.reverse()
+      this.markdownListNum = this.markdownList.length
+      // 获取第一页 markdown 内容
+      this.currentMarkdownList = this.markdownList.slice((this.currentPage - 1) * 5, this.currentPage * 5)
+      this.setTags()
+      this.setTotalNum()
     }
   },
   watch: {
@@ -95,6 +116,13 @@ export default {
     currentPage () {
       // 修改当前页面所显示的 markdown
       this.currentMarkdownList = this.markdownList.slice((this.currentPage - 1) * 5, this.currentPage * 5)
+    },
+    tags () {
+      if (this.tags === this.tagList) {
+        this.getMarkdownList()
+      } else {
+        this.getMarkdownListByTags()
+      }
     }
   }
 }

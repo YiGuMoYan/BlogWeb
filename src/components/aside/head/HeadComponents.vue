@@ -4,23 +4,26 @@
     <img src="../../../assets/Head.jpg" alt="head">
     <!-- 标签块 -->
     <div class="tagBlock">
-      <span><HeadTagComponent name="博客" :num="markdownListNum"/></span>
-      <span class="tagMargin"><HeadTagComponent name="标签" :num="tagListNum"/></span>
+      <span @click="blogClick"><HeadTagComponent name="博客" :num="markdownListNum"/></span>
+      <span @click="tagClick" class="tagMargin"><HeadTagComponent name="标签" :num="tagListNum"/></span>
     </div>
     <!-- 标语 -->
     <div class="slogan">{{ slogan }}</div>
     <div class="connect">
       <router-link class="link" to="connect">联系我们</router-link>
     </div>
+    <head-tag-dialog-component :tag-list="tagList"/>
   </div>
 </template>
 
 <script>
 import HeadTagComponent from '@/components/aside/head/HeadTagComponent.vue'
+import HeadTagDialogComponent from '@/components/aside/head/HeadTagDialogComponent.vue'
+import eventMessage from '@/EventMessage'
 
 export default {
   name: 'HeadComponents',
-  components: { HeadTagComponent },
+  components: { HeadTagDialogComponent, HeadTagComponent },
   props: {
     markdownListNum: {
       type: Number,
@@ -29,11 +32,24 @@ export default {
     tagListNum: {
       type: Number,
       default: 0
+    },
+    tagList: {
+      type: Array,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: []
     }
   },
   data () {
     return {
       slogan: '很高兴与您在这里相遇'
+    }
+  },
+  methods: {
+    blogClick () {
+      this.$router.push('/')
+    },
+    tagClick () {
+      eventMessage.$emit('changeTagDialog', true)
     }
   }
 }
