@@ -1,10 +1,11 @@
 <template>
   <div class="index">
     <div class="column aside">
-      <HeadComponents :markdownListNum="markdownListNum" :tagListNum="tagListNum"/>
+      <head-components :markdownListNum="markdownListNum" :tagListNum="tagListNum"/>
     </div>
     <div class="column content">
-      <ContentHeadComponent title="标题"/>
+      <content-head-component title="标题"/>
+      <div class="main"><content-main-component :markdown-list="markdownList"/></div>
     </div>
   </div>
 </template>
@@ -13,10 +14,11 @@
 import HeadComponents from '@/components/aside/head/HeadComponents.vue'
 import ContentHeadComponent from '@/components/content/ContentHeadComponent.vue'
 import axios from 'axios'
+import ContentMainComponent from '@/components/content/ContentMainComponent.vue'
 
 export default {
   name: 'IndexView',
-  components: { ContentHeadComponent, HeadComponents },
+  components: { ContentMainComponent, ContentHeadComponent, HeadComponents },
   created () {
     this.getMarkdownList()
   },
@@ -58,14 +60,11 @@ export default {
 <style lang="less" scoped>
 .index {
   margin-top: 40px;
-  width: 90vw;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
+  padding-left: 6%;
+  padding-right: 6%;
 
   .column {
     float: left;
-    padding: 10px;
   }
 
   .aside {
@@ -74,6 +73,11 @@ export default {
 
   .content {
     width: 70%;
+    margin-left: 3%;
+
+    .main {
+      height: 250px;
+    }
   }
 }
 
@@ -81,6 +85,7 @@ export default {
   .column.content, .column.aside {
     width: 100%;
     margin-top: 20px;
+    margin-left: 0;
   }
 }
 
