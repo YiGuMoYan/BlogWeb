@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import IndexView from '@/views/IndexView.vue'
 import BlogView from '@/views/BlogView.vue'
+import ContentMainComponent from '@/views/IndexView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'indexView',
-    component: IndexView
+    component: ContentMainComponent
   },
   {
     path: '/blog/:id',

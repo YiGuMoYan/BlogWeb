@@ -2,14 +2,24 @@
   <div class="card">
     <div v-if="type===0">
       <span class="column image leftRadius">
-        <img class="leftRadius" :src="imageUrl" alt="">
+        <img class="leftRadius" :src="imageUrl" alt="backgroundImage">
       </span>
-      <span class="column title rightRadius"></span>
+      <span class="column title rightRadius">
+        <div class="message">
+          <h2>{{markdown.title}}</h2>
+          <i class="el-icon-date"></i>{{markdown.time}}
+        </div>
+      </span>
     </div>
     <div v-if="type===1">
-      <span class="column title leftRadius"></span>
+      <span class="column title leftRadius">
+        <div class="message">
+          <h2>{{markdown.title}}</h2>
+          {{markdown.time}}
+        </div>
+      </span>
       <span class="column image rightRadius">
-        <img class="rightRadius" :src="imageUrl" alt="">
+        <img class="rightRadius" :src="imageUrl" alt="backgroundImage">
       </span>
     </div>
   </div>
@@ -24,6 +34,11 @@ export default {
     type: {
       type: Number,
       default: 1
+    },
+    markdown: {
+      type: Object,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: {}
     }
   },
   created () {
@@ -55,6 +70,7 @@ export default {
   padding-right: 5%;
   padding-left: 5%;
   transition: all .2s;
+  display: table;
 
   .column {
     float: left;
@@ -72,6 +88,14 @@ export default {
 
   .title {
     background-color: aliceblue;
+    text-align: center;
+    vertical-align: middle;
+    .message {
+      margin-top: 50px;
+      h2 {
+        font-size: 25px;
+      }
+    }
   }
 
   .leftRadius {

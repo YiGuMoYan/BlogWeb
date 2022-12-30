@@ -1,97 +1,88 @@
 <template>
-  <div class="index">
-    <div class="column aside">
-      <head-components :markdownListNum="markdownListNum" :tagListNum="tagListNum"/>
+  <div class="main">
+    <div v-for="(markdown, index) in markdownList" :key="markdown.id" class="card">
+      <content-card-component :type="isMutuality ? index % 2 : 0" :markdown="markdown"/>
     </div>
-    <div class="column content">
-      <content-head-component title="标题"/>
-      <div class="main"><content-main-component :markdown-list="markdownList"/></div>
-    </div>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      @current-change="paginationChange"
+      :page-count="totalNum"
+      class="pagination">
+    </el-pagination>
   </div>
 </template>
 
 <script>
-import HeadComponents from '@/components/aside/head/HeadComponents.vue'
-import ContentHeadComponent from '@/components/content/ContentHeadComponent.vue'
-import axios from 'axios'
-import ContentMainComponent from '@/components/content/ContentMainComponent.vue'
+import ContentCardComponent from '@/components/content/ContentCardComponent.vue'
+import eventMessage from '@/EventMessage'
 
 export default {
-  name: 'IndexView',
-  components: { ContentMainComponent, ContentHeadComponent, HeadComponents },
+  name: 'ContentMainComponent',
+  components: { ContentCardComponent },
+  props: {
+    // 当前页面要展示的 markdown
+    markdownList: {
+      type: Array,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: []
+    }
+  },
   created () {
-    this.getMarkdownList()
+    this.setWindowWidth()
+    // 接收 总页面数量变化 的信号
+    eventMessage.$on('changeTotalNum', (val) => {
+      this.totalNum = val
+    })
   },
   data () {
     return {
-      markdownList: [],
-      markdownListNum: 0,
-      tagList: [],
-      tagListNum: 0
+      // 当前屏幕宽度 用于适配设备
+      windowWidth: document.documentElement.clientWidth,
+      // 是否让图片进行交错排列
+      isMutuality: this.windowWidth >= 1000,
+      // 总页面数量
+      totalNum: 1,
+      // 当前页面
+      currentPage: 1
     }
   },
   methods: {
-    getMarkdownList () {
+    // 监听页面宽度
+    setWindowWidth () {
       const that = this
-      axios({
-        url: 'http://127.0.0.1:8080/markdown/selectAllMarkdownMessage',
-        method: 'get'
-      }).then(function (res) {
-        that.markdownList = res.data.data
-        that.markdownListNum = that.markdownList.length
-        for (const markdown of that.markdownList) {
-          that.getTagList(markdown.classification)
-        }
-        that.tagListNum = that.tagList.length
-      })
-    },
-    getTagList (tagStr) {
-      const tags = tagStr.split('|')
-      for (const tag of tags) {
-        if (this.tagList.indexOf(tag) === -1) {
-          this.tagList.push(tag)
-        }
+      this.isMutuality = this.windowWidth >= 1000
+      window.onresize = () => {
+        return (() => {
+          that.windowWidth = document.documentElement.clientWidth
+        })()
       }
+    },
+    // 当前页面改变
+    paginationChange (val) {
+      eventMessage.$emit('currentPageChange', val)
+    }
+  },
+  watch: {
+    windowWidth (val) {
+      this.isMutuality = val >= 1000
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.index {
-  margin-top: 40px;
-  padding-left: 6%;
-  padding-right: 6%;
+.main {
+  width: 100%;
+  height: 100%;
+  text-align: center;
 
-  .column {
-    float: left;
+  .card {
+    margin-top: 50px;
   }
 
-  .aside {
-    width: 25%;
+  .pagination {
+    margin-top: 50px;
   }
-
-  .content {
-    width: 70%;
-    margin-left: 3%;
-
-    .main {
-      height: 250px;
-    }
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .column.content, .column.aside {
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 0;
-  }
-}
-
-.index:after {
-  content: "";
-  display: table;
-  clear: both;
 }
 </style>

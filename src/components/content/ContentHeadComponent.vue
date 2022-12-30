@@ -22,10 +22,10 @@ export default {
 
 .head {
   width: 100%;
-  height: 250px;
+  height: 200px;
   background-color: #142334;
   border-radius: 20px;
-  line-height: 250px;
+  line-height: 200px;
   font-size: 50px;
   color: aliceblue;
   text-align: center;
