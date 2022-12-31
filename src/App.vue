@@ -4,7 +4,8 @@
       <!-- 边框栏 -->
       <div class="column aside">
         <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
-        <timeline-component class="timeline"/>
+        <visitor-component/>
+        <timeline-component/>
       </div>
       <!-- 主内容 -->
       <div class="column content">
@@ -27,10 +28,11 @@ import axios from 'axios'
 import eventMessage from '@/EventMessage'
 import TimelineComponent from '@/components/aside/TimelineComponent.vue'
 import FootComponent from '@/components/FootComponent.vue'
+import VisitorComponent from '@/components/aside/MessageComponent.vue'
 
 export default {
   name: 'IndexView',
-  components: { FootComponent, TimelineComponent, ContentHeadComponent, HeadComponents },
+  components: { VisitorComponent, FootComponent, TimelineComponent, ContentHeadComponent, HeadComponents },
   created () {
     this.getMarkdownList()
     eventMessage.$on('currentPageChange', (val) => {
@@ -156,8 +158,14 @@ export default {
     margin-top: 20px;
     margin-left: 0;
   }
+
+  .visitor {
+    margin-top: 30px;
+  }
+
   .timeline {
     display: none;
+    margin-top: 30px;
   }
 }
 

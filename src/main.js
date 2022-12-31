@@ -15,6 +15,10 @@ import '@kangc/v-md-editor/lib/theme/style/vuepress.css'
 
 import Prism from 'prismjs'
 
+import moment from 'moment'
+
+Vue.prototype.$moment = moment
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)

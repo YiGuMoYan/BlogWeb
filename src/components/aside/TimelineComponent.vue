@@ -16,6 +16,7 @@
 
 <script>
 import axios from 'axios'
+import eventMessage from '@/EventMessage'
 
 export default {
   name: 'TimelineComponent',
@@ -36,6 +37,7 @@ export default {
         method: 'get'
       }).then(function (res) {
         that.timelineList = res.data.data
+        eventMessage.$emit('getBeginTime', that.timelineList[0].time)
         that.timelineList = that.timelineList.reverse()
         that.timelineListShow = that.timelineList.slice(0, 4)
       })
