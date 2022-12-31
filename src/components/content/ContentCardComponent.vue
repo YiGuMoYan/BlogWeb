@@ -6,16 +6,16 @@
       </span>
       <span class="column title rightRadius">
         <div class="message">
-          <h2>{{markdown.title}}</h2>
-          <i class="el-icon-date"></i>{{markdown.time}}
+          <h2>{{ markdown.title }}</h2>
+          <i class="el-icon-date"></i>{{ markdown.time }}
         </div>
       </span>
     </div>
     <div v-if="type===1">
       <span class="column title leftRadius">
         <div class="message">
-          <h2>{{markdown.title}}</h2>
-          {{markdown.time}}
+          <h2>{{ markdown.title }}</h2>
+          {{ markdown.time }}
         </div>
       </span>
       <span class="column image rightRadius">

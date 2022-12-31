@@ -53,27 +53,6 @@ export default {
       const lastTime = this.$moment('2022-08-20 14:10:32', 'YYYY-MM-DD HH:mm:ss').valueOf()
       this.time = this.$moment(thisTime - lastTime).format('YYYY-MM-DD HH:mm:ss')
       this.time = this.$moment(this.time).subtract(1970, 'year').format('YY年MM月DD日 HH时mm分ss秒')
-    },
-    addZero (num) {
-      if (parseInt(num) < 10) {
-        num = '0' + num
-      }
-      return num
-    },
-    formatMsToDate (ms) {
-      if (ms) {
-        const oDate = new Date(ms)
-        const oYear = oDate.getFullYear()
-        const oMonth = oDate.getMonth() + 1
-        const oDay = oDate.getDate()
-        const oHour = oDate.getHours()
-        const oMin = oDate.getMinutes()
-        const oSen = oDate.getSeconds()
-        return oYear + '-' + this.addZero(oMonth) + '-' + this.addZero(oDay) + ' ' + this.addZero(oHour) + ':' +
-          this.addZero(oMin) + ':' + this.addZero(oSen)
-      } else {
-        return ''
-      }
     }
   }
 }

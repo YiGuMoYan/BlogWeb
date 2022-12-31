@@ -1,7 +1,7 @@
 <template>
   <div class="headTag">
-    <div class="name">{{name}}</div>
-    <div class="num">{{num}}</div>
+    <div class="name">{{ name }}</div>
+    <div class="num">{{ num }}</div>
   </div>
 </template>
 
@@ -27,9 +27,11 @@ export default {
   width: 70px;
   height: 100px;
   transition: all .5s;
+
   .name {
     font-size: 20px;
   }
+
   .num {
     font-size: 25px;
     margin-top: 20px;
@@ -38,5 +40,6 @@ export default {
 
 .headTag:hover {
   color: #49B1F5;
+  cursor: pointer;
 }
 </style>

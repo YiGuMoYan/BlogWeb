@@ -10,7 +10,7 @@
     <!-- 标语 -->
     <div class="slogan">{{ slogan }}</div>
     <div class="connect">
-      <router-link class="link" to="connect">联系我们</router-link>
+      <a class="link" href="http://www.yigumoyan.top">联系我们</a>
     </div>
     <head-tag-dialog-component :tag-list="tagList"/>
   </div>

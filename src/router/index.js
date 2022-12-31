@@ -18,6 +18,10 @@ const routes = [
   {
     path: '/timeline',
     component: TimelineView
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 

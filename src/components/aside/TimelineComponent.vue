@@ -8,7 +8,7 @@
             v-for="timeline in timelineListShow"
             :key="timeline.id"
             :timestamp="timeline.time">
-            {{timeline.point}}
+            {{ timeline.point }}
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -67,7 +67,7 @@ export default {
     color: aliceblue;
   }
 
-  a{
+  a {
     text-decoration: none;
   }
 

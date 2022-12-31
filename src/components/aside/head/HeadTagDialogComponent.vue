@@ -54,9 +54,14 @@ export default {
 <style lang="less" scoped>
 /deep/ .el-dialog {
   background-color: #2C3441 !important;
+  border-radius: 20px;
 
   .el-dialog__title, .el-checkbox__label {
     color: aliceblue;
+  }
+
+  /deep/ .el-icon-close {
+    color: white;
   }
 
   .selectAll, .cancel {

@@ -65,6 +65,7 @@ export default {
     margin-top: 15px;
     color: aliceblue;
     font-size: 13px;
+
     a {
       color: aliceblue;
       text-decoration: none;
