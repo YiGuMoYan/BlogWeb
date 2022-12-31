@@ -73,7 +73,7 @@ export default {
     getMarkdownList () {
       const that = this
       axios({
-        url: 'http://127.0.0.1:8080/markdown/selectAllMarkdownMessage',
+        url: that.$url + 'markdown/selectAllMarkdownMessage',
         method: 'get'
       }).then(function (res) {
         that.markdownList = res.data.data
@@ -83,7 +83,7 @@ export default {
     getMarkdownListByTags () {
       const that = this
       axios({
-        url: 'http://127.0.0.1:8080/markdown/selectMarkdownByClassifications',
+        url: that.$url + 'markdown/selectMarkdownByClassifications',
         method: 'post',
         data: {
           tags: that.tags

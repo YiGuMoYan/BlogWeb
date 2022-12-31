@@ -23,6 +23,8 @@ Vue.prototype.$ = $
 
 Vue.prototype.$moment = moment
 
+Vue.prototype.$url = 'http://127.0.0.1:8080/'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)

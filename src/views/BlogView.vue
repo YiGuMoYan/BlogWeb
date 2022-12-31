@@ -22,7 +22,7 @@ export default {
     getMarkdownById () {
       const that = this
       axios({
-        url: 'http://127.0.0.1:8080/markdown/selectMarkdownById',
+        url: that.$url + 'markdown/selectMarkdownById',
         method: 'post',
         data: {
           id: that.id

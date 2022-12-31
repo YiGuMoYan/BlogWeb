@@ -35,7 +35,7 @@ export default {
     getTimelineList () {
       const that = this
       axios({
-        url: 'http://127.0.0.1:8080/timeline/selectAllTimeline',
+        url: that.$url + 'timeline/selectAllTimeline',
         method: 'get'
       }).then(function (res) {
         that.timelineList = res.data.data

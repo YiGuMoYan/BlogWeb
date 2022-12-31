@@ -53,7 +53,7 @@ export default {
     getImageUrl () {
       const that = this
       axios({
-        url: 'http://127.0.0.1:8080/backgroundImageFile/selectBackgroundImageFile',
+        url: that.$url + 'backgroundImageFile/selectBackgroundImageFile',
         method: 'get'
       }).then(function (res) {
         that.imageUrl = res.data.data
