@@ -1,16 +1,18 @@
 <template>
   <div class="timeline">
-    <div class="title"><h2>时间轴</h2></div>
-    <div>
-      <el-timeline>
-        <el-timeline-item
-          v-for="timeline in timelineListShow"
-          :key="timeline.id"
-          :timestamp="timeline.time">
-          {{timeline.point}}
-        </el-timeline-item>
-      </el-timeline>
-    </div>
+    <router-link to="/timeline">
+      <div class="title"><h2>时间轴</h2></div>
+      <div>
+        <el-timeline>
+          <el-timeline-item
+            v-for="timeline in timelineListShow"
+            :key="timeline.id"
+            :timestamp="timeline.time">
+            {{timeline.point}}
+          </el-timeline-item>
+        </el-timeline>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -56,12 +58,27 @@ export default {
   padding-top: 15px;
 
   .title {
+    transition: all .3s;
     text-align: center;
     color: aliceblue;
   }
 
   /deep/ .el-timeline-item__content {
     color: aliceblue;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  .router-link-active {
+    text-decoration: none;
+  }
+}
+
+.timeline:hover {
+  .title {
+    color: #49B1F5;;
   }
 }
 </style>

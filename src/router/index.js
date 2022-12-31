@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BlogView from '@/views/BlogView.vue'
 import ContentMainComponent from '@/views/IndexView.vue'
+import TimelineView from '@/views/TimelineView.vue'
 
 Vue.use(VueRouter)
 
@@ -12,8 +13,11 @@ const routes = [
   },
   {
     path: '/blog/:id',
-    name: 'blogView',
     component: BlogView
+  },
+  {
+    path: '/timeline',
+    component: TimelineView
   }
 ]
 
