@@ -1,16 +1,21 @@
 <template>
-  <div class="index">
-    <!-- 边框栏 -->
-    <div class="column aside">
-      <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
-      <timeline-component class="timeline"/>
+  <div>
+    <div class="index">
+      <!-- 边框栏 -->
+      <div class="column aside">
+        <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
+        <timeline-component class="timeline"/>
+      </div>
+      <!-- 主内容 -->
+      <div class="column content">
+        <!-- 主内容的标题 -->
+        <content-head-component :title="title"/>
+        <!-- 主内容的内容 -->
+        <div class="main"><router-view :markdown-list="currentMarkdownList" :total="markdownListNum" :currentPage="currentPage"/></div>
+      </div>
     </div>
-    <!-- 主内容 -->
-    <div class="column content">
-      <!-- 主内容的标题 -->
-      <content-head-component :title="title"/>
-      <!-- 主内容的内容 -->
-      <div class="main"><router-view :markdown-list="currentMarkdownList" :total="markdownListNum" :currentPage="currentPage"/></div>
+    <div>
+      <foot-component/>
     </div>
   </div>
 </template>
@@ -21,10 +26,11 @@ import ContentHeadComponent from '@/components/content/ContentHeadComponent.vue'
 import axios from 'axios'
 import eventMessage from '@/EventMessage'
 import TimelineComponent from '@/components/aside/TimelineComponent.vue'
+import FootComponent from '@/components/FootComponent.vue'
 
 export default {
   name: 'IndexView',
-  components: { TimelineComponent, ContentHeadComponent, HeadComponents },
+  components: { FootComponent, TimelineComponent, ContentHeadComponent, HeadComponents },
   created () {
     this.getMarkdownList()
     eventMessage.$on('currentPageChange', (val) => {
@@ -141,10 +147,6 @@ export default {
   .content {
     width: 70%;
     margin-left: 3%;
-
-    .main {
-      height: 250px;
-    }
   }
 }
 
