@@ -9,8 +9,8 @@ module.exports = {
     [
       'prismjs',
       {
-        languages: allLanguages,
-      },
-    ],
-  ],
+        languages: allLanguages
+      }
+    ]
+  ]
 }

@@ -23,6 +23,7 @@ export default {
 
 <style lang="less" scoped>
 .headTag {
+  user-select: none;
   color: aliceblue;
   width: 70px;
   height: 100px;

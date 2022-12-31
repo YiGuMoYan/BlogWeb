@@ -78,7 +78,9 @@ export default {
 
 .timeline:hover {
   .title {
-    color: #49B1F5;;
+    color: #49B1F5;
+    font-size: 20px;
+    margin-top: 0;
   }
 }
 </style>

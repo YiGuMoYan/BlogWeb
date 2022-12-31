@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="app">
     <div class="index">
       <!-- 边框栏 -->
       <div class="column aside">
         <head-components :markdown-list-num="markdownListNum" :tag-list-num="tagListNum" :tag-list="tagList"/>
         <visitor-component/>
         <timeline-component/>
+        <technology-component/>
       </div>
       <!-- 主内容 -->
       <div class="column content">
@@ -29,10 +30,10 @@ import eventMessage from '@/EventMessage'
 import TimelineComponent from '@/components/aside/TimelineComponent.vue'
 import FootComponent from '@/components/FootComponent.vue'
 import VisitorComponent from '@/components/aside/MessageComponent.vue'
+import TechnologyComponent from '@/components/aside/TechnologyComponent.vue'
 
 export default {
-  name: 'IndexView',
-  components: { VisitorComponent, FootComponent, TimelineComponent, ContentHeadComponent, HeadComponents },
+  components: { TechnologyComponent, VisitorComponent, FootComponent, TimelineComponent, ContentHeadComponent, HeadComponents },
   created () {
     this.getMarkdownList()
     eventMessage.$on('currentPageChange', (val) => {
@@ -41,6 +42,9 @@ export default {
     eventMessage.$on('changeTags', (val) => {
       this.tags = val
     })
+  },
+  mounted () {
+    this.$('.app').fadeTo(2000, 1)
   },
   data () {
     return {
@@ -133,6 +137,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.app {
+  opacity: 0
+}
+
 .index {
   margin-top: 40px;
   padding-left: 6%;
@@ -164,7 +172,6 @@ export default {
   }
 
   .timeline {
-    display: none;
     margin-top: 30px;
   }
 }

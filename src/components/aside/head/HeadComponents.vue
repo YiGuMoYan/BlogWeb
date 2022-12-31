@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <!-- 头像 -->
-    <img src="../../../assets/Head.jpg" alt="head">
+    <img src="../../../assets/Head.jpg" alt="head" class="headImage">
     <!-- 标签块 -->
     <div class="tagBlock">
       <span @click="blogClick"><HeadTagComponent name="博客" :num="markdownListNum"/></span>
@@ -64,15 +64,16 @@ export default {
   color: aliceblue;
   border-radius: 20px;
 
-  img {
+  .headImage {
     margin-top: 30px;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     transition: all .5s;
+    user-select: none;
   }
 
-  img:hover {
+  .headImage:hover {
     transform: rotate(360deg);
   }
 
@@ -88,6 +89,7 @@ export default {
     margin-top: 30px;
     font-size: 23px;
     transition: all .3s;
+    user-select: none;
   }
 
   .slogan:hover {
@@ -97,6 +99,7 @@ export default {
   .connect {
     margin-top: 30px;
     font-size: 15px;
+    user-select: none;
 
     .link {
       color: aliceblue;

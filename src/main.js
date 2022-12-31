@@ -17,6 +17,10 @@ import Prism from 'prismjs'
 
 import moment from 'moment'
 
+import $ from 'jquery'
+
+Vue.prototype.$ = $
+
 Vue.prototype.$moment = moment
 
 Vue.config.productionTip = false

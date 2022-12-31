@@ -21,6 +21,7 @@ export default {
 }
 
 .head {
+  user-select: none;
   width: 100%;
   height: 200px;
   background-color: #142334;

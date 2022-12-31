@@ -59,6 +59,8 @@ export default {
   .hitokoto {
     color: aliceblue;
     font-size: 15px;
+    margin-right: 20px;
+    margin-left: 20px;
   }
 
   .message {
