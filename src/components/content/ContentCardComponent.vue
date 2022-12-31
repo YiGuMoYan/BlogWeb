@@ -90,9 +90,11 @@ export default {
     background-color: aliceblue;
     text-align: center;
     vertical-align: middle;
+
     .message {
       margin-top: 50px;
       color: black;
+
       h2 {
         font-size: 25px;
       }
