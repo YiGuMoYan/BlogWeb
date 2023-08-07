@@ -1,4 +1,5 @@
-# blog-new
+# blog-web
+基于 Vue 的博客系统前端
 
 ## Project setup
 ```
